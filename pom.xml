@@ -26,6 +26,12 @@
       <version>5.7.0</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.github.maximan3000/caesar-cipher -->
+    <dependency>
+      <groupId>com.github.maximan3000</groupId>
+      <artifactId>caesar-cipher</artifactId>
+      <version>1.0.0</version>
+    </dependency>
   </dependencies>
 
   <build>
