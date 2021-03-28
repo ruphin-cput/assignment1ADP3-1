@@ -30,5 +30,8 @@ public class Cipher {
     public String ceasarDecrypt(String toDecrypt, int offset){
         return encryption.decrypt(toDecrypt,offset);
     }
+    public String bruteForce(String toBreak){
+        return "";
+    }
 
 }
