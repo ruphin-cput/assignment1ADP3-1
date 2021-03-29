@@ -21,13 +21,13 @@ private String textToDecrypt = "Vaqvsh";
     }
 
     @Test
-    public void testCeasarEncrypt(){
-        String result = cipher.ceasarEncrypt(textToEncrypt, 5);
+    public void testCaesarEncrypt(){
+        String result = cipher.caesarEncrypt(textToEncrypt, 5);
         assertEquals("Vaqvsh",result);
     }
     @Test
-    public void testCeasarDecrypt(){
-        String result = cipher.ceasarDecrypt(textToDecrypt, 5);
+    public void testCaesarDecrypt(){
+        String result = cipher.caesarDecrypt(textToDecrypt, 5);
         assertEquals(textToEncrypt,result);
     }
     @Test
