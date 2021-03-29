@@ -4,7 +4,7 @@ package za.ac.cput;
  * @author Adriaan(Annemie) Burger 219014868
  * Cipher.java
  * ADP3 Assignment1 March/April 2021
- * 
+ *
  */
 
 /*
@@ -30,8 +30,19 @@ public class Cipher {
     public String caesarDecrypt(String toDecrypt, int offset){
         return encryption.decrypt(toDecrypt,offset);
     }
-    public String bruteForce(String toBreak){
-        return "";
+
+    public int findKey(String toBreak, String message){
+        int key = 1;
+        while(true){
+            if(encryption.decrypt(toBreak,key).equals(message)){
+                System.out.println("Encryption key "+ key+" solves "+ toBreak + " to mean: " + message);
+                return key;
+            } else{
+                key++;
+            }
+        }
+
     }
+
 
 }
