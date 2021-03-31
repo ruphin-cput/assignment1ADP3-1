@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,14 +46,22 @@ private Caesar encryption = CaesarFabric.getEncryptionSystem();
         assertSame(textToDecrypt,textToEncrypt);
     }
 
-    @Test @Timeout(1000)
-    public void testFindKey(){ //guess the key until you get the right output(broke the encryption)
-        // There are only 26 possible keys
-       // fail();
-        int key = cipher.findKey(textToDecrypt, textToEncrypt);
+    @Test @Timeout(value = 700, unit = TimeUnit.MILLISECONDS) //value = 500 will make the test timeout fail
+    public void testFindKeyRandom() throws InterruptedException { //guess the key until you get the right output(broke the encryption)
+
+        int key = cipher.findKeyRandom(textToDecrypt, textToEncrypt);
         String resultEncrypt = encryption.encrypt(textToEncrypt,key);
         String resultDecrypt = encryption.decrypt(textToDecrypt,key);
         assertNotSame(resultEncrypt,resultDecrypt);
         }
+
+    @Test
+    public void testFindKeyBruteForce(){
+        fail();//shows the use of failing a test, without this the test will pass
+        int key = cipher.findKeyBruteForce(textToDecrypt, textToEncrypt);
+        String resultEncrypt = encryption.encrypt(textToEncrypt,key);
+        String resultDecrypt = encryption.decrypt(textToDecrypt,key);
+        assertNotSame(resultEncrypt,resultDecrypt);
+    }
 
 }

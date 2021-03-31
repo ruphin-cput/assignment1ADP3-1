@@ -19,6 +19,8 @@ used but also how easily it could be solved.
 import com.grayen.encryption.caesar.algorithm.Caesar;
 import com.grayen.encryption.caesar.algorithm.implementation.CaesarFabric;
 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Cipher {
     Caesar encryption = CaesarFabric.getEncryptionSystem();
@@ -31,8 +33,27 @@ public class Cipher {
         return encryption.decrypt(toDecrypt,offset);
     }
 
-    public int findKey(String toBreak, String message){
+    public int findKeyRandom(String toBreak, String message) throws InterruptedException { //guess the key with Random values
+        Random r = new Random();
+        int low = 1;
+        int high = 16;
+        int randomKey=r.nextInt(high-low) + low;
+        TimeUnit.MILLISECONDS.sleep(600); //to help illustrate the timeout test
+
+        while(true){
+            if(encryption.decrypt(toBreak,randomKey).equals(message)){
+                System.out.println("Encryption key "+ randomKey+" solves "+ toBreak + " to mean: " + message);
+                return randomKey;
+
+            } else{
+                randomKey = r.nextInt(high-low) + low;
+            }
+        }
+    }
+
+    public int findKeyBruteForce(String toBreak, String message)  {
         int key = 1;
+
         while(true){
             if(encryption.decrypt(toBreak,key).equals(message)){
                 System.out.println("Encryption key "+ key+" solves "+ toBreak + " to mean: " + message);
@@ -40,6 +61,7 @@ public class Cipher {
             } else{
                 key++;
             }
+
         }
 
     }
