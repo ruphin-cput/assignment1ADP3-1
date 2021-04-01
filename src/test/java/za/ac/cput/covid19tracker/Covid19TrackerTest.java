@@ -1,4 +1,4 @@
-package za.ac.cput;
+package za.ac.cput.covid19tracker;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
